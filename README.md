@@ -9,6 +9,11 @@ How to start the game:
 * `cd` into repository
 * `cargo run`
 
-Window should open, where you can play Snake game. Have fun!
+Window should open, where you can play Snake game.
 
 ![](screenshot.png)
+
+Remarks:
+
+* Speed of a snake can be changed in `src/game.rs`, `MOVING_PERIOD`. Lower value = faster snake.
+* Default of a snake is regulated by `SNAKE_DEFAULT_LEN` in `src/snake.rs`.

@@ -1,6 +1,6 @@
-#![allow(dead_code)]
-#![allow(unused_variables)]
-#![allow(unused_imports)]
+// #![allow(dead_code)]
+// #![allow(unused_variables)]
+// #![allow(unused_imports)]
 
 use piston_window::types::Color;
 use piston_window::*;
@@ -37,5 +37,15 @@ fn main() {
         event.update(|arg| {
             game.update(arg.dt);
         });
+
+        // Changing a Title to reflect score!
+        // let mut new_title = String::from("Snake");
+        // new_title.push(' ');
+        // new_title.push_str(game.get_snake_len().to_string().as_str());
+        // window.set_title(new_title);
+
+        // To follow state of the game:
+        // println!("{:?}", game.snake)
+        // window.set_title(format!("{:?}", game.snake));
     }
 }

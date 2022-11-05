@@ -12,11 +12,14 @@ const FOOD_COLOR: Color = [0.80, 0.00, 0.00, 1.00];
 const BORDER_COLOR: Color = [0.00, 0.00, 0.00, 1.00];
 const GAMEOVER_COLOR: Color = [0.90, 0.00, 0.00, 0.50];
 
+/// Speed of a snake (frames per second).
 const MOVING_PERIOD: f64 = 0.1;
+
+/// Time to restart the game after death (in seconds).
 const RESTART_TIME: f64 = 1.0;
 
 pub struct Game {
-    snake: Snake,
+    pub snake: Snake,
 
     food_exists: bool,
     food_x: i32,
@@ -56,6 +59,7 @@ impl Game {
             _ => Some(self.snake.head_direction()),
         };
 
+        // If snake is moving UP, and we hit DOWN, nothing will happen.
         if dir.unwrap() == self.snake.head_direction().opposite() {
             return;
         }
@@ -121,7 +125,8 @@ impl Game {
 
         let mut new_x = rng.gen_range(1..self.width - 1);
         let mut new_y = rng.gen_range(1..self.width - 1);
-
+        
+        // We cannot let that food generates at the place where the snake already is.
         while self.snake.overlap_tail(new_x, new_y) {
             new_x = rng.gen_range(1..self.width - 1);
             new_y = rng.gen_range(1..self.width - 1);
@@ -142,6 +147,7 @@ impl Game {
         self.waiting_time = 0.0;
     }
 
+    // The point of this function is not to have new window when the game finishes.
     fn restart(&mut self) {
         self.snake = Snake::new(2, 2);
         self.waiting_time = 0.0;
@@ -150,4 +156,8 @@ impl Game {
         self.food_y = 4;
         self.game_over = false;
     }
+
+    // pub fn get_snake_len(&self) -> usize {
+    //     self.snake.len()
+    // }
 }
